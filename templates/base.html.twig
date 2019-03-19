@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="{{ asset('css/normalize-3.0.3.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/font-awesome-4.3.0.min.css')}}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+        crossorigin="anonymous">
+        <link rel="stylesheet" href="{{ asset('css/index.css')}}">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oleo+Script+Swash+Caps|Karla">
+        <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+        <script src="{{ asset('js/jquery.flexslider-min.js')}}"></script>
+         <link rel="stylesheet"  href="{{ asset('css/flexslider.css')}}">
+        <!-- JavaScript de l'application -->
+        <script src="{{ asset('js/utilities.js')}}"></script>
+        <title>Science Tour</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <header class="basehtml">
+      <section class="titre">
+        <img src="{{asset('img/logo.png')}}" alt="logoScienceTour">
+        <div>
+          <h1> Bientôt chez vous !</h1>
+          <p>Le Science Tour est conçu et développé par les Petits Débrouillards en partenariat
+          avec France Télévisions et "C'est Pas Sorcier".<p>
+        </div>
+      </section>
+      <nav class="clear">
+        <div><a href="{{path("home")}}"><i class="fas fa-home"></i>Home</a></div>
+        <div><a href="{{path("about")}}"><i class="fas fa-info"></i>A propos</a></div>
+        <div><a href="{{path("home")}}"><i class="fas fa-user"></i></i>Connection</a></div>
+        <div><a href="{{asset('connectionadmin/index.html.twig')}}"><i class="fas fa-home"></i>Connection administrateur</a></div>
+      </nav>
+    </header>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+    <footer class="clear">
+      <p>Le Science Tour est un dispositif conçu et développé par l’association des Petits Débrouillards en partenariat avec :</p>
+    </footer>
+
+</html>

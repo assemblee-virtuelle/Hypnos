@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Project{% endblock %}
+
+{% block body %}
+    <h1 class="formtitle">Create new Project</h1>
+
+  <section class="formulaire">
+    {{ include('project/_form.html.twig') }}
+  </section>
+
+    <a href="{{ path('project_index') }}" class="liens">back to list</a>
+{% endblock %}

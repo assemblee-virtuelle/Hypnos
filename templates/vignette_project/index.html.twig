@@ -1,0 +1,10 @@
+    <div class="vignettes">
+    <div>
+      {% for project in projects %}
+      <figure>
+        <img src="{{asset('uploads/illustration/'~project.illustration) }}">
+
+       <figcaption>{{ project.title }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
