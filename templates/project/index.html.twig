@@ -33,8 +33,10 @@
                 <td>{{ project.frontPage ? 'Yes' : 'No' }}</td>
                 <td>{{ project.illustration }}</td>
                 <td>
+                  <section class="linkintable">
                     <a href="{{ path('project_show', {'id': project.id}) }}" class="liens">show</a>
                     <a href="{{ path('project_edit', {'id': project.id}) }}" class="liens">edit</a>
+                  </section>
                 </td>
             </tr>
         {% else %}
@@ -44,6 +46,7 @@
         {% endfor %}
         </tbody>
     </table>
-
+  <section class="button" >
     <a href="{{ path('project_new') }}" class="liens" class="center">Create new</a>
+  </section>
 {% endblock %}

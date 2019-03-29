@@ -46,11 +46,11 @@
         </tbody>
     </table>
 
-    <section class="center">
-      <a href="{{ path('project_index') }}" class="liens">back to list</a>
+    <section class="button" >
+      <a href="{{ path('project_index') }}" class="liens" >back to list</a>
       <a href="{{ path('project_edit', {'id': project.id}) }}" class="liens">edit</a>
+    </section>
 
       {{ include('project/_delete_form.html.twig') }}
-    </section>
 
 {% endblock %}

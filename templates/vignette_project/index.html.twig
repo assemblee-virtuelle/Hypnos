@@ -2,9 +2,8 @@
     <div>
       {% for project in projects %}
       <figure>
-        <img src="{{asset('uploads/illustration/'~project.illustration) }}">
-
-       <figcaption>{{ project.title }}</figcaption>
+      <a href="{{ path('project_show', { 'id': project.id }) }}" ><img src="{{asset('uploads/illustration/'~project.illustration) }}"></a>
+        <figcaption>{{ project.title }}</figcaption>
       </figure>
       {% endfor %}
     </div>

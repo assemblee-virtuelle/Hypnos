@@ -45,10 +45,13 @@
 
 .basehtml  {
   background-color: yellow;
+  /*background: radial-gradient(#DAA520  ,yellow );	*/
 }
 
 .basehtml nav {
-  background-color : #708090;
+  background: radial-gradient(#C0C0C0, #696969);
+  padding: 6px 8px;
+  /*background-color : #696969;*/
   padding-top: 15px;
   padding-bottom: 15px;
 }
@@ -145,14 +148,35 @@ form .button {
   margin: 0 auto;
 }
 
+section.button {
+  text-align: center;
+  margin: 30px;
+}
+
+section.linkintable {
+  margin: 15px;
+
+}
+
 .liens {
   text-decoration: none;
+  background: radial-gradient(#C0C0C0, #696969);
+  padding: 6px 8px;
+  border-radius: 30px;
   color: yellow;
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
+
 }
 
+.lien::after{
+  margin: 20px;
+}
+
+.lien::before {
+  margin: 20px;
+}
 .liens:hover {
   color : grey;
 }

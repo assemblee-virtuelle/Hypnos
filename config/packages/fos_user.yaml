@@ -1,0 +1,11 @@
+fos_user:
+     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
+     firewall_name: main
+     user_class: App\Entity\User
+     service:                               # this lines TEST
+         mailer: fos_user.mailer.twig_swift # this lines TEST
+     from_email:
+         address: "hello@yourmail.fr"
+         sender_name: "Sender name"   #"%mailer_user%"
+    # templating:        # this lines TEST 
+    #     engines: ['twig']   # this lines TEST
