@@ -32,11 +32,27 @@
       <nav class="clear">
         <div><a href="{{path("home")}}"><i class="fas fa-home"></i>Home</a></div>
         <div><a href="{{path("about")}}"><i class="fas fa-info"></i>A propos</a></div>
-        <div><a href="{{path("app_login")}}"><i class="fas fa-user"></i></i>Connection</a></div>
-        <div><a href="{{asset('connectionadmin/index.html.twig')}}"><i class="fas fa-home"></i>Connection administrateur</a></div>
+        <!-- user.is_granted -->
+        {% if is_granted('ROLE_ADMIN') %}
+        <div><a href="{{path("easyadmin")}}"><i class="fas fa-home"></i>Administrateur</a></div>
+        <div><a href="{{path("app_logout")}}"><i class="fas fa-user"></i></i>Deconnection</a></div>
+      {% elseif is_granted('ROLE_USER') %}
+      <div><a href="{{path("app_logout")}}"><i class="fas fa-user"></i></i>Deconnection</a></div>
+      {% elseif is_granted('ROLE_EDITOR') %}
+      <div><a href="{{path("app_logout")}}"><i class="fas fa-user"></i></i>Deconnection</a></div>
+
+     {% else %}
+     <div><a href="{{path("app_login")}}"><i class="fas fa-user"></i></i>Connection</a></div>
+      {% endif %}
+
       </nav>
     </header>
+
+
     <body>
+      {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p class="center">Hello {{ app.user.username }} !</p>
+{% endif %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

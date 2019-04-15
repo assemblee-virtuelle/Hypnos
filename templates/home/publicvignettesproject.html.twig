@@ -1,0 +1,9 @@
+<div class="vignettes">
+<div>
+  {% for project in projects %}
+  <figure>
+  <a href="{{ path('project_show', { 'id': project.id }) }}" ><img src="{{asset('uploads/illustration/'~project.illustration) }}"></a>
+    <figcaption>{{ project.title }}</figcaption>
+  </figure>
+  {% endfor %}
+</div>

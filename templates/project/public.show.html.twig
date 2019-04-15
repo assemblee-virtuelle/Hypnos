@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project{% endblock %}
+
+{% block body %}
+    <h1 class="formtitle">Project</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td>{{ project.title }}</td>
+            </tr>
+            <tr>
+                <th>Decription</th>
+                <td>{{ project.decription }}</td>
+            </tr>
+            <tr>
+                <th>StartedAt and StartedAt</th>
+                <td>{{ project.startedAt ? project.startedAt|date('H:i Y-m-d ') : '' }} to
+                  {{ project.endedAt ? project.endedAt|date('H:i Y-m-d ') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td>{{ project.place }}</td>
+            </tr>
+            <tr>
+                <th>Illustration</th>
+                <td><img src="{{ asset('uploads/illustration/'~project.illustration) }}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <section class="button" >
+      <a href="{{ path('project_public_index') }}" class="liens" >back to list</a>
+
+    </section>
+
+
+{% endblock %}

@@ -31,7 +31,7 @@
                 <td>{{ project.endedAt ? project.endedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ project.place }}</td>
                 <td>{{ project.frontPage ? 'Yes' : 'No' }}</td>
-                <td>{{ project.illustration }}</td>
+                <td><img src="{{ asset('uploads/illustration/'~project.illustration) }}"></td>
                 <td>
                   <section class="linkintable">
                     <a href="{{ path('project_show', {'id': project.id}) }}" class="liens">show</a>

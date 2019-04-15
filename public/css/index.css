@@ -205,6 +205,9 @@ section.linkintable {
  margin-top: 15px;
 }
 
+table.table td img{
+  max-width: 300px;
+}
 
 
 

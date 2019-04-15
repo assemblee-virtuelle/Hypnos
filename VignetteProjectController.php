@@ -7,11 +7,17 @@ use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 class VignetteProjectController extends AbstractController
 {
     /**
      * @Route("/vignette/project", name="vignette_project")
+     *
+     * @IsGranted("ROLE_ADMIN, ROLE_USER", message="No access!")
+     *
      */
     public function index(Project $project)
     {
@@ -26,14 +32,4 @@ class VignetteProjectController extends AbstractController
     }
 
 
-    // public function show(Project $project)
-    // {
-    //   return $this->render('vignette_project/index.html.twig', [
-    //     'controller_name' => 'VignetteProjectController',
-    //     'project' => $project,
-    //     ]);
-    // $project = new Project();
-    // $illustration = $project->setIllustration();
-    // $illustration = $project->setTitle();
-    //}
 }

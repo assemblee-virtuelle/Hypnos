@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Project index{% endblock %}
+
+{% block body %}
+    <h1 class="formtitle">Project List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Decription</th>
+                <th>StartedAt and StartedAt</th>
+                <th>Place</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for project in projects %}
+            <tr>
+                <td>{{ project.title }}</td>
+                <td>{{ project.decription }}</td>
+                <td>{{ project.startedAt ? project.startedAt|date('H:i Y-m-d ') : '' }} to
+                {{ project.endedAt ? project.endedAt|date('H:i Y-m-d ') : '' }}</td>
+                <td>{{ project.place }}</td>
+                <td>
+                  <section class="linkintable">
+                    <a href="{{ path('project_public_show', {'id': project.id}) }}" class="liens">show</a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <a href="{{ path("home")}}" class="liens">participate</a>
+                    {% else %}
+                    <a href="{{path("user_new")}}" class="liens">create account</a>
+                    {% endif %}
+                </section>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+{% endblock %}

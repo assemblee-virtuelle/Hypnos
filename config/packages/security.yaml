@@ -19,48 +19,45 @@ security:
             algorithm: bcrypt
             cost: 12
     firewalls:
+        # secured_area:
+           # logout:
+           #   path: /logout
+           #   target: /
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         main:
+            anonymous:    ~
             pattern: ^/
+            #security: true
+            # security: true #ajout  ??
+          #  switch_user: true #ajout  ??
             form_login:
                 login_path: /login
-                check_path: /login_check
-                default_target_path: /profile
+                check_path: /login
+                default_target_path: /loginprofile
             logout:
                 path:   app_logout
-            anonymous: ~
+                target: /home
+        # access_control:
+        #           #require ROLE_ADMIN for /admin*
+        #           - { path: ^/admin, roles: ROLE_ADMIN }
+          #  logout_on_user_change: true
+            #    target: /
+              #  invalidate_session: true  #ajout ??
+     # access_control:
+     #    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    # access_control:
+        # require ROLE_ADMIN for /admin*
+      #  - { path: ^/admin, roles: ROLE_ADMIN }
 
-          # main:
-          #       anonymous:  ~  # ou true
-          #       logout:
-          #           path:   app_logout
-          # login:
-          #   pattern: .*
-          #       # submit the login form here
-          #       check_path: /login_check
-          #       # the user is redirected here when they need to log in
-          #       login_path: /login
-          #       # if true, forward the user to the login form instead of redirecting
-          #       use_forward: false
-
-
-                # pattern: ^/
-                #         form_login:
-                #             provider:
-                #          logout:       true
-                #          anonymous:    true
 
                 # guard:
                 #     authenticators:
                 #         - App\Security\LoginFormAuthenticator
                         # where to redirect after logout
                         # target: app_any_route
-        #  access_control:
-                        # require ROLE_ADMIN for /admin*
-                        #- { path: ^/admin, roles: ROLE_ADMIN }
                         # matches /admin/users/*
                       #  - { path: ^/admin/users, roles: ROLE_SUPER_ADMIN }
                         # matches /admin/* except for anything matching the above rule
@@ -93,10 +90,6 @@ security:
                         #  form_login:
                         #    csrf_token_generator: security.csrf.token_manager
 
-                        # providers:
-                        #     fos_userbundle:
-                        #         id: fos_user.user_provider.username
-                        #
 
                         #   access_control:
                         #     - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }

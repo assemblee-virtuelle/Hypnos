@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+
+{% block body %}
+
+
+
+<h1 class="formtitle">Your projects</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Decription</th>
+            <th>CreationDate</th>
+            <th>StartedAt</th>
+            <th>EndedAt</th>
+            <th>Place</th>
+            <th>FrontPage</th>
+            <th>Illustration</th>
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for projectscreator in projectcreator %}
+        <tr>
+            <td>{{ projectscreator.id }}</td>
+            <td>{{  projectscreator.title }}</td>
+            <td>{{ projectscreator.decription }}</td>
+            <td>{{ projectscreator.creationDate ? projectscreator.creationDate|date('Y-m-d H:i') : '' }}</td>
+            <td>{{ projectscreator.startedAt ? projectscreator.startedAt|date('Y-m-d H:i') : '' }}</td>
+            <td>{{ projectscreator.endedAt ? projectscreator.endedAt|date('Y-m-d H:i') : '' }}</td>
+            <td>{{ projectscreator.place }}</td>
+            <td>{{ projectscreator.frontPage ? 'Yes' : 'No' }}</td>
+            <td><img src="{{ asset('uploads/illustration/'~projectscreator.illustration) }}"></td>
+            <td>
+              <section class="linkintable">
+                <a href="{{ path('project_edit', {'id': projectscreator.id}) }}" class="liens">edit</a>
+              </section>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="10">no records found</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<section class="button" >
+<a href="{{ path('project_new') }}" class="liens" class="center">Create new</a>
+</section>
+
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
-<form method="post" action="login_check">
+<form method="post" action="login">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
@@ -28,5 +28,8 @@
 
     <button class="button" class="btn btn-lg btn-primary" type="submit"> Sign in </button>
 </form>
+</section>
+<section class="button">
+    <a href="{{path("user_new")}}" class="liens">Create Account</a>
 </section>
 {% endblock %}

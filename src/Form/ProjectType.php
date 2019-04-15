@@ -21,7 +21,7 @@ class ProjectType extends AbstractType
             ->add('endedAt',  DateType::class, [ 'widget' => 'single_text'])
             ->add('place')
             ->add('frontPage')
-            ->add('illustration', Filetype::class, ['label' => 'Illustration du projet'/*, 'data_class' => null*/])
+            ->add('illustration', Filetype::class, ['label' => 'Illustration du projet', 'data_class' => null])
             ->add('creator')
         ;
     }

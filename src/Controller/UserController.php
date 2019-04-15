@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Route("/user")
@@ -17,8 +19,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/", name="user_index", methods={"GET"})
+     * @Route("/user", name="user_index", methods={"GET"})
+     *
+     * @IsGranted("ROLE_ADMIN, ROLE_SUPER_ADMIN", message="No access!")
+     *
      */
+
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
@@ -43,6 +49,7 @@ class UserController extends AbstractController
             $form->get('plainPassword')->getData())
           );
             $user->setSalt('abcdef');
+            $user->setEnabled('1');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -55,6 +62,8 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 
     /**
      * @Route("/{id}", name="user_show", methods={"GET"})
@@ -90,6 +99,8 @@ class UserController extends AbstractController
 
     /**
      * @Route("/{id}", name="user_delete", methods={"DELETE"})
+     *
+     * @IsGranted("ROLE_ADMIN, ROLE_SUPER_ADMIN", message= "no access !")
      */
     public function delete(Request $request, User $user): Response
     {
@@ -101,4 +112,7 @@ class UserController extends AbstractController
 
         return $this->redirectToRoute('user_index');
     }
+
+
+
 }

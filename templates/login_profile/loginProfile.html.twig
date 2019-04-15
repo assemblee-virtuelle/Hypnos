@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+
+
+<p>Bonjour {{ visitor.username }} !</p>
+
+{% if is_granted('ROLE_EDITOR')%}
+<a href="{{path("project_bycreator")}}" class="liens">See my projects</a>
+{% endif %}
+
+
+
+
+{% endblock %}
