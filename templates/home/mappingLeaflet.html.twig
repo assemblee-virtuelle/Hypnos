@@ -1,0 +1,138 @@
+<head>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+crossorigin=""></script>
+
+ <!-- JavaScript de l'application -->
+<script src="{{asset('js/leaflet.js')}}"></script>
+</head>
+<div>
+    <button id='allProject'>All Project</button>
+    <button id='pastProject'>Past Project</button>
+    <button id='futurProject'>Futur Project</button>
+    <button id='allProjectAround'>All project next to me</button>
+</div>
+{{ leaflet_map('mymap')|raw }}
+{{ leaflet_icone ('mymap')|raw}}
+<script>
+//get_markers('allEvent');
+  // get_markers();
+//getPopup();
+//for(element of document.querySelector('.querySelect')) // autre solution en ajoutant une class aux boutons
+  let allProject = document.getElementById("allProject").addEventListener("click", get_markers);
+  let pastProject = document.getElementById("pastProject").addEventListener("click", get_markers);
+  let futurProject = document.getElementById("futurProject").addEventListener("click", get_markers);
+  let allProjectAround = document.getElementById("allProjectAround").addEventListener("click", get_markers);
+
+</script>
+
+
+
+<!-- on affiche la carte -->
+
+<!-- //zoomé sur paris
+// var mymap = L.map('mapid').setView([48.8534, 2.3488], 11);
+//zoomé sur la France
+// var mymap = L.map('mapid').setView([48, 2], 5.3);
+//
+//
+// L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+//   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+//   maxZoom: 18,
+//   id: 'mapbox.streets',
+//       accessToken: 'pk.eyJ1IjoicGFyc2VyaWFuanVseSIsImEiOiJjanVpbmx0MXEwOHhjM3lsbG8ycmFhZHlmIn0.onqkeNx7j1WWu-WPbg9WIw'
+//
+//    }).addTo(mymap); -->
+
+
+
+
+
+<!-- <script>
+
+
+
+var marker = [];
+
+var mymap = L.map('mapid').setView([46.85, 2.3518], 11);
+// import du fond de carte
+//function display_map(mymap){
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom: 18,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoicGFyc2VyaWFuanVseSIsImEiOiJjanVpbmx0MXEwOHhjM3lsbG8ycmFhZHlmIn0.onqkeNx7j1WWu-WPbg9WIw'
+
+ }).addTo(mymap);
+
+
+// ajouter une fenetre contextuelle à un click sur un marqueur
+
+function display_marker(mymap, latitude, longitude, title, adresse)
+{
+
+  for(p in project) {
+marker = new L.Marker([p.latitude,p.longitude])
+    marker.addTo(mymap)
+    .bindPopup('<strong>'+p.title+'</strong>' + '<br/>' + p.adresse)
+    .openPopup();
+    markers.push(marker) // les markers stockés dans un tableau
+    console.log(markers);
+  }
+}
+
+ function get_markers(p) //= null)
+ {
+//     // Si la variable est null alors afficher tout les evenements sinon afficher en fonction du clique choisi
+     projectType = p === null ? 'allProject' : p.target.id;// recupere id du bouton un evenement se produit
+
+    fetch(`http://localhost/sites/Hypnos/public/index.php/project/jsongps?option=${projectType}`)
+     .then(function(response){
+         return response.json();
+     })
+     .then(function(myJson) {
+        console.log(JSON.stringify(myJson)); // myJson array ou sont stockes mes evenements
+         //display_marker(mymap,latitude,longitude);
+
+         // supprimer les markers
+         for(m of markers){
+             mymap.removeLayer(m)
+         }
+
+         // recuperation de tout mes evenements
+         for( let e of myJson) {
+             display_marker(mymap, p.latitude, p.longitude, p.nom, p.adresse);
+         }
+         console.log(markers);
+     });
+
+
+
+// TEST marqueur sur paris
+//var marker = L.marker([48.836533, 2.334451]).addTo(mymap);
+//marker.bindPopup("<p>You are here</p>").openPopup();
+//}
+
+
+
+
+//initmap ();
+
+</script>
+<!-- <?php>
+function display_marker(mymap, latitude, longitude, title, adresse)
+{
+
+  foreach (p in project) {
+marker = new L.Marker([p.latitude,p.longitude])
+    marker.addTo(mymap)
+    .bindPopup('<strong>'+p.title+'</strong>' + '<br/>' + p.adresse)
+    .openPopup();
+    markers.push(marker) // les markers stockés dans un tableau
+    console.log(markers);
+  }
+
+} -->

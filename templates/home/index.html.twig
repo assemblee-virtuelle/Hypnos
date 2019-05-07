@@ -17,18 +17,24 @@
 
       {{ include("home/vignettesproject.html.twig") }}
 
+
+</script>
+</div>
+
     </section>
   <section class="aside">
     <aside>
       <div class="calendrier">
-        <h1>calendrier</h1>
+        <h1 class="asidetitle">Calendrier</h1>
       </div>
       <div class="carte">
-        <h1>carte</h1>
+        <h1 class="asidetitle">Find a project in France</h1>
+
+        {{ include("home/mappingLeaflet.html.twig")}}
       </div>
     </aside>
   </section>
-  <!-- <script type="text/javascript" src="{{asset("js/vignettes.js")}}"></script> -->
+
 </body>
 
 {% endblock %}

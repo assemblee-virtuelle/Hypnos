@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Network\ServiceCurl;
 use App\Entity\Project;
 use App\Form\ProjectType;
 use App\Repository\ProjectRepository;
@@ -12,12 +13,21 @@ use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @Route("/project")
  */
 class ProjectController extends AbstractController
 {
+
+  protected $curl;
+
+  public function __construct(ServiceCurl $curl)
+  {
+    // parent::__construct();
+    $this->curl = $curl;
+  }
   /**
    * @Route("/public/index", name="project_public_index", methods={"GET"})
    *
@@ -28,6 +38,97 @@ class ProjectController extends AbstractController
         'projects' => $projectRepository->findAll(),
     ]);
   }
+
+  /**
+  * @Route("/jsongps", name="project_jsongps", methods={"GET"})
+  *
+  */
+
+  public function jsonGps(Request $request)
+  {
+      // em entity manager
+      $project = [];
+      $em = $this->getDoctrine()->getManager();
+      //On construit l'url   ?option=pastProject ...
+      switch ($request->query->get('option')){
+          case 'pastProject':
+          $project = $em->getRepository(Project::class)->pastProject(); // var_dump($events); die;
+          break;
+          case 'futurProject':
+          $project = $em->getRepository(Project::class)->futurProject();
+          case 'allProject':
+          default:
+          $project = $em->getRepository(Project::class)->findAll();
+      }
+
+      //$events = $em->getRepository('AppBundle:Events')->findAll();
+      //$events = $em->getRepository('AppBundle:Events')->find();
+      // $curl = $this -> container -> get('App\Network\ServiceCurl');
+      // $events = $this -> getEvents();
+      $gpsProject = [];
+
+
+
+          foreach($project as $p) {
+
+              $adresse = str_replace(' ', '+', $p ->getPlace()); // lorsque la propriété est en privé il faut faire le get
+
+              $suggestions = json_decode($this->curl->curl_get($adresse),true);
+              //les données correspondant aux resultats de l'objet json obtenuavec curl.
+              //le [0] correspond à la premiere reponse trouvée dans la requete CURLOPT_URL car elle renvoi plusieurs reponses
+              $gps  = $suggestions['features'][0]['geometry']['coordinates'];
+              $p ->latitude = $gps[1];
+              $p ->longitude = $gps[0];
+              $gpsProject[] = $p;
+
+          }
+           // var_dump(json_encode($gpsProject)); die;
+           $response = new JsonResponse();
+           $response->setData($gpsProject);
+           return $response;
+      // return $this->json(json_encode($gpsProject));
+                  // ->render('home/mappingLeaflet.html.twig', [
+                  //   'project' => $projectRepository->findAll(),
+                  // ]
+
+  }
+
+  public function getProjects()
+{
+    $em = $this->getDoctrine()->getManager();
+    $projects = $em->getRepository(Project::class)->findAll();
+
+    return $projects;
+}
+
+  /**
+   * @Route("/icone", name="icone")
+   */
+  public function icone(Request $request)
+  {
+      //$curl = $this -> get('AppBundle\Network\ServiceCurl');
+     // $events = $this -> getEvents();
+     //$gpsEvents = [];
+
+      //foreach($events as $e) {
+          //$adresse = str_replace(' ', '+', $e ->getAdresse()); // lorsque la propriété est en privé il faut faite le get
+          // $suggestions = json_decode($curl->curl_get($adresse),true);
+          // $gps  = $suggestions['features'][0]['geometry']['coordinates'];
+          // $e ->latitude = $gps[1];
+          // $e ->longitude = $gps[0];
+          // $gpsEvents[] = $e;
+      // }
+      return $this->render('home/mappingLeaflet.html.twig', [
+          'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+          'projects' => $this -> getProjects(),
+
+          // 'latitude' => $gps[1],
+          // 'longitude' => $gps[0],
+          // 'latitude' => $e->$gps[1],
+          // 'longitude' => $e->$gps[0]
+      ]);
+  }
+
 
   /**
   *

@@ -19,6 +19,24 @@ class ProjectRepository extends ServiceEntityRepository
         parent::__construct($registry, Project::class);
     }
 
+    public function pastProject()
+   {
+       $query = $this->createQueryBuilder('p')
+       ->where('p.startedAt < :date')
+       ->setParameter('date', (new \DateTime())->format('Y-m-d H:i'))
+       ->getQuery();
+      return $query->getResult();
+   }
+
+   public function futurProject()
+   {
+       $query = $this->createQueryBuilder('p')
+       ->where('p.startedAt > :date')
+       ->setParameter('date', (new \DateTime())->format('Y-m-d H:i'))
+       ->getQuery();
+   return $query->getResult();
+   }
+
     // /**
     //  * @return Project[] Returns an array of Project objects
     //  */

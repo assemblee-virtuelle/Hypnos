@@ -3,11 +3,12 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProjectRepository")
  */
-class Project
+class Project implements \JsonSerializable
 {
     /**
      * @ORM\Id()
@@ -178,4 +179,14 @@ class Project
     {
       return $this->getTitle();
     }
+
+    /**
+       * Transforme l'objet PHP en JSON
+       */
+      public function jsonSerialize()
+      {
+          $vars = get_object_vars($this);
+
+          return $vars;
+      }
 }

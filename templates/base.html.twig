@@ -15,7 +15,20 @@
         crossorigin="anonymous"></script>
         <script src="{{ asset('js/jquery.flexslider-min.js')}}"></script>
          <link rel="stylesheet"  href="{{ asset('css/flexslider.css')}}">
-        <!-- JavaScript de l'application -->
+         <!-- Ajout du fichier CSS de la cartogrpahie LEAFLET -->
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+         crossorigin=""/>
+         <!-- Fichier javascript LEAFLET -->
+         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+         integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+         crossorigin=""/>
+         <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+         integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+         crossorigin=""></script>
+
+          <!-- JavaScript de l'application -->
+        <script src="{{asset('js/leaflet.js')}}"></script>
         <script src="{{ asset('js/utilities.js')}}"></script>
         <title>Science Tour</title>
         {% block stylesheets %}{% endblock %}
@@ -53,6 +66,7 @@
       {% if is_granted('IS_AUTHENTICATED_FULLY') %}
     <p class="center">Hello {{ app.user.username }} !</p>
 {% endif %}
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>

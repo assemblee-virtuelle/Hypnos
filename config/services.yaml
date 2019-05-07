@@ -26,5 +26,16 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
+    App\Network\:
+        resource: '../src/Network'
+        public: true
+
+    # App\Twig\TwigmapExtend\:
+    #     class: App\Twig\TwigmapExtend
+    #     public: true
+    #     tags:
+    #     - { name: twig.extension, priority: 1024 }
+
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

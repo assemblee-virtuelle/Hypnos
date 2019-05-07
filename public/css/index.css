@@ -58,7 +58,7 @@
 
 /* homepage */
 .homehtml aside {
-  background-color: grey;
+  /* background-color: grey; */
   float: right;
   width: 29%;
   text-align: center;
@@ -209,7 +209,24 @@ table.table td img{
   max-width: 300px;
 }
 
+/* MAPPING LEAFLET */
 
+#mapid { height: 600px; }
+
+.carte {
+
+}
+
+
+/* ASIDE */
+
+h1.asidetitle {
+  color : red;
+  font-size: 30px;
+  background: radial-gradient(#C0C0C0, #696969);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
 /*  FOOTER  */
 
