@@ -23,7 +23,7 @@ class ProjectRepository extends ServiceEntityRepository
    {
        $query = $this->createQueryBuilder('p')
        ->where('p.startedAt < :date')
-       ->setParameter('date', (new \DateTime())->format('Y-m-d H:i'))
+       ->setParameter('date', (new \DateTime()))
        ->getQuery();
       return $query->getResult();
    }
@@ -31,8 +31,17 @@ class ProjectRepository extends ServiceEntityRepository
    public function futurProject()
    {
        $query = $this->createQueryBuilder('p')
-       ->where('p.startedAt > :date')
-       ->setParameter('date', (new \DateTime())->format('Y-m-d H:i'))
+       ->where('p.startedAt > :d')
+       ->setParameter('d', (new \DateTime()))
+       ->getQuery();
+   return $query->getResult();
+   }
+
+   public function localProject($ville)
+   {
+       $query = $this->createQueryBuilder('p')
+       ->where('p.place LIKE :ville')
+       ->setParameter('ville', $ville)
        ->getQuery();
    return $query->getResult();
    }

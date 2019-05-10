@@ -19,7 +19,7 @@ public function curl_get($adresse) {
     //fournit l'URL à utiliser dans la demande
     // le type=street correspond à la recherche de l'adresse nom de rue
     //CURLOPT_URL => "http://api-adresse.data.gouv.fr/search/?q=$adresse&type=street",  //type=street??
-    CURLOPT_URL => "http://api-adresse.data.gouv.fr/search/?q=$adresse&type=street",  // sans type=street pour test ville Paris
+    CURLOPT_URL => "http://api-adresse.data.gouv.fr/search/?q=$adresse",  // sans type=street pour test ville Paris
 
     //TRUE pour inclure l'en-tête dans la valeur de retour.
     CURLOPT_HEADER => 0,

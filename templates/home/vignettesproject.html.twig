@@ -1,5 +1,7 @@
     <div class="vignettes">
-    <div>
+      <h2 class="vignettestitle" >Project List</h2>
+    <div class="vignetteproject">
+
       {% for project in projects %}
       <figure>
       <a href="{{ path('project_public_show', { 'id': project.id }) }}" ><img src="{{asset('uploads/illustration/'~project.illustration) }}"></a>

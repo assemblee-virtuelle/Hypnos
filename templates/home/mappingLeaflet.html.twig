@@ -9,14 +9,14 @@ crossorigin=""></script>
  <!-- JavaScript de l'application -->
 <script src="{{asset('js/leaflet.js')}}"></script>
 </head>
-<div>
-    <button id='allProject'>All Project</button>
-    <button id='pastProject'>Past Project</button>
-    <button id='futurProject'>Futur Project</button>
-    <button id='allProjectAround'>All project next to me</button>
+<div class='projectsearch'  >
+  <button id='allProject' class="projectsearchcolor">All Project</button>
+  <button id='pastProject' class="projectsearchcolor">Past Project</button>
+  <button id='futurProject' class="projectsearchcolor">Futur Project</button>
+  <!-- <button id='allProjectAround' class="projectsearchcolor">All project next to me</button> -->
 </div>
 {{ leaflet_map('mymap')|raw }}
-{{ leaflet_icone ('mymap')|raw}}
+{# {{ leaflet_icone ('mymap')|raw}} #}
 <script>
 //get_markers('allEvent');
   // get_markers();
@@ -25,7 +25,7 @@ crossorigin=""></script>
   let allProject = document.getElementById("allProject").addEventListener("click", get_markers);
   let pastProject = document.getElementById("pastProject").addEventListener("click", get_markers);
   let futurProject = document.getElementById("futurProject").addEventListener("click", get_markers);
-  let allProjectAround = document.getElementById("allProjectAround").addEventListener("click", get_markers);
+  // let allProjectAround = document.getElementById("allProjectAround").addEventListener("click", get_markers);
 
 </script>
 

@@ -56,6 +56,10 @@ class ProjectController extends AbstractController
           break;
           case 'futurProject':
           $project = $em->getRepository(Project::class)->futurProject();
+          break;
+          // case 'paris':
+          // $project = $em->getRepository(Project::class)->localProject('paris');
+          // break;
           case 'allProject':
           default:
           $project = $em->getRepository(Project::class)->findAll();

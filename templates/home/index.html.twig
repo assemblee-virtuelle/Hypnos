@@ -11,11 +11,14 @@
   <section class="homebase">
 
     <div class="slider">
-      <h1>Slider</h1>
+      {{ include("home/mappingLeaflet.html.twig")}}
+
 
     </div>
-
+  
+    <div>
       {{ include("home/vignettesproject.html.twig") }}
+    </div>
 
 
 </script>
@@ -27,11 +30,7 @@
       <div class="calendrier">
         <h1 class="asidetitle">Calendrier</h1>
       </div>
-      <div class="carte">
-        <h1 class="asidetitle">Find a project in France</h1>
 
-        {{ include("home/mappingLeaflet.html.twig")}}
-      </div>
     </aside>
   </section>
 

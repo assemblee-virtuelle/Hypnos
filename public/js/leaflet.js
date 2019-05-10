@@ -45,7 +45,7 @@ function get_markers(p = null)
   //     // Si la variable est null alors afficher tout les evenements sinon afficher en fonction du clique choisi
   projectType = p === null ? 'allProject' : p.target.id;// recupere id du bouton un evenement se produit
 
-  fetch("http://localhost/sites/Hypnos/public/index.php/project/jsongps?option=${projectType}")
+  fetch(`http://localhost/sites/Hypnos/public/index.php/project/jsongps?option=${projectType}`)
   .then(function(response){
     return response.json();
   })
